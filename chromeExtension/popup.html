@@ -60,11 +60,24 @@
         select:focus, button:focus {
             outline: none; /* Remove outline for better aesthetics */
         }
+
+
+        #fileName {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #00bcd4; /* Highlighted color for file name */
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <h3>Smart Downloads Manager</h3>
-    <p>Set expiration times for your downloads.</p>
+    <p>Managing the download:</p>
+    <br>
+    <p>Last downloaded file: 
+        <div id="fileName">Loading...</div> <!-- Placeholder for file name -->
+    </p>
+    
     <label for="expiry">Choose lifespan:</label>
     <select id="expiry">
         <option value="1h">1 Hour</option>
