@@ -6,7 +6,7 @@ body {
     height: auto;
     background-color: #121212; /* Dark mode background */
     color: #ffffff; /* Light text for contrast */
-    border-radius: 100px; /* Rounded corners for the popup */
+    border-radius: 10px; /* Rounded corners for the popup */
 }
 
 h3 {
@@ -16,19 +16,24 @@ h3 {
 
 p {
     text-align: center;
-    color: #b3b3b3; /* Lighter text for descriptions */
+    color: #c1c1c1; /* Lighter text for descriptions */
+    margin: 10px 0;
 }
 
 label {
     font-size: 14px;
-    display: block;
-    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.dropdown-set {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 select {
-    width: 100%;
+    width: 50%; /* Smaller dropdown menu */
     padding: 8px;
-    margin-bottom: 15px;
     font-size: 14px;
     background-color: #1f1f1f; /* Dark dropdown background */
     color: #ffffff;
@@ -37,29 +42,58 @@ select {
 }
 
 button {
-    width: 50%;
-    padding: 10px;
-    font-size: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
     background-color: #007BFF;
     color: #ffffff;
     border: none;
     border-radius: 8px; /* Rounded corners */
     cursor: pointer;
-    align-content: center;
+    margin-left: 10px;
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-select:focus, button:focus {
-    outline: none; /* Remove outline for better aesthetics */
+#viewFilesToggle {
+    text-align: center;
+    text-decoration: underline;
+    color: #e0e0e0; /* Clickable blue text */
+    cursor: pointer;
+    margin: 10px 0;
 }
 
+#viewFilesToggle:hover {
+    text-decoration: underline;
+}
 
-#fileName {
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #00bcd4; /* Highlighted color for file name */
-    text-align: center;
+.file-list-container {
+    max-height: 150px; /* Limit height for scrollable container */
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: none; /* Initially hidden */
+    background-color: #1f1f1f; /* Dark background for list */
+    padding: 10px;
+    border: 1px solid #333333;
+    border-radius: 8px; /* Rounded corners */
+    margin-top: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin: 5px 0;
+    color: #dad9d9;
+}
+
+span.lifespan {
+    color: #70b4fd; /* Subtle blue for lifespan */
+    font-style: italic;
 }

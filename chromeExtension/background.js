@@ -1,67 +1,82 @@
-// background.js
-
-let pendingDownloadId = null;
-
-// When a download is created, store its ID temporarily
-chrome.downloads.onCreated.addListener((downloadItem) => {
-    if (!downloadItem.url) return;
-
-    pendingDownloadId = downloadItem.id; // Store the download ID
+chrome.runtime.onInstalled.addListener(() => {
+    chrome.storage.local.set({ files: [] }, () => {
+        console.log("Initialized local storage.");
+    });
 });
 
-// When the download state changes, check if it's fully started
-chrome.downloads.onChanged.addListener((delta) => {
-    if (pendingDownloadId && delta.id === pendingDownloadId && delta.state?.current === "in_progress") {
-        // Open a dedicated page for setting the expiration time
-        chrome.tabs.create({ url: "popup.html" });
+// Store download metadata on creation
+chrome.downloads.onCreated.addListener((downloadItem) => {
+    const downloadTime = new Date().getTime();
 
-        // Save the download ID to local storage for the popup page
-        chrome.storage.local.set({ currentDownloadId: pendingDownloadId });
-        pendingDownloadId = null; // Reset
+    chrome.downloads.onChanged.addListener((delta) => {
+        if (delta.id === downloadItem.id && delta.filename) {
+            const fileName = delta.filename.current.split(/[/\\]/).pop();
+
+            chrome.storage.local.get("files", (data) => {
+                const files = data.files || [];
+                files.push({
+                    fileName: fileName,
+                    lifespan: "inf",
+                    downloadTime: downloadTime,
+                    id: delta.id,
+                });
+
+                chrome.storage.local.set({ files: files }, () => {
+                    console.log("File stored with filename:", fileName);
+                });
+            });
+        }
+    });
+});
+
+// Update the filename once it's available
+chrome.downloads.onChanged.addListener((delta) => {
+    if (delta.filename) { // Check if the filename has changed
+        chrome.storage.local.get("files", (data) => {
+            const files = data.files || [];
+            const fileIndex = files.findIndex((file) => file.id === delta.id);
+
+            if (fileIndex !== -1) {
+                files[fileIndex].fileName = delta.filename.current.split(/[/\\]/).pop(); // Extract file name
+                chrome.storage.local.set({ files: files }, () => {
+                    console.log("Filename updated:", files[fileIndex]);
+                });
+            }
+        });
     }
 });
-
-
-
-
-
-
-chrome.downloads.onCreated.addListener((downloadItem) => {
-    if (!downloadItem.url) return;
-
-    // Save the download ID and file name to local storage
-    chrome.storage.local.set({
-        currentDownloadId: downloadItem.id,
-        currentFileName: downloadItem.filename.split(/[/\\]/).pop() // Extract file name from path
-    });
-
-    // Open the popup
-    chrome.action.openPopup();
-});
-
-
-
-
-
 
 // Periodically check for expired files
 setInterval(() => {
     const currentTime = new Date().getTime();
 
-    chrome.storage.local.get(null, (items) => {
-        for (const key in items) {
-            if (key.startsWith("download_")) {
-                const expirationTime = items[key];
+    chrome.storage.local.get("files", (data) => {
+        const files = data.files || [];
+        const updatedFiles = files.filter((file) => {
+            if (file.lifespan !== "inf") {
+                const lifespanInMs = getLifespanInMs(file.lifespan);
+                const expirationTime = file.downloadTime + lifespanInMs;
 
-                if (expirationTime && expirationTime < currentTime) {
-                    // The file has expired; remove it from the system
-                    const downloadId = key.replace("download_", "");
-                    chrome.downloads.remove(parseInt(downloadId));
-
-                    // Remove the expired entry from storage
-                    chrome.storage.local.remove(key);
+                if (expirationTime < currentTime) {
+                    // File expired; take action (e.g., notify or delete)
+                    console.log(`File expired: ${file.fileName}`);
+                    return false; // Remove expired file
                 }
             }
-        }
+            return true; // Keep non-expired files
+        });
+
+        // Update storage
+        chrome.storage.local.set({ files: updatedFiles });
     });
 }, 60 * 60 * 1000); // Check every hour
+
+// Helper function to convert lifespan to milliseconds
+function getLifespanInMs(lifespan) {
+    switch (lifespan) {
+        case "1h": return 60 * 60 * 1000;
+        case "1d": return 24 * 60 * 60 * 1000;
+        case "1w": return 7 * 24 * 60 * 60 * 1000;
+        default: return Infinity; // "inf"
+    }
+}

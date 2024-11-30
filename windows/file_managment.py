@@ -13,6 +13,44 @@ def handle_message(message):
             return {"status": "error", "message": str(e)}
     return {"status": "error", "message": "Invalid command"}
 
+
+
+
+setInterval(() => {
+    const currentTime = new Date().getTime();
+
+    chrome.storage.local.get("files", (data) => {
+        const files = data.files || [];
+        const updatedFiles = files.filter((file) => {
+            if (file.lifespan !== "forever") {
+                const lifespanInMs = getLifespanInMs(file.lifespan);
+                const expirationTime = file.downloadTime + lifespanInMs;
+
+                if (expirationTime < currentTime) {
+                    // File expired; take action (e.g., notify or delete)
+                    console.log(`File expired: ${file.fileName}`);
+                    return false; // Remove expired file from storage
+                }
+            }
+            return true;
+        });
+
+        // Update storage with only non-expired files
+        chrome.storage.local.set({ files: updatedFiles });
+    });
+}, 3600000); // Run every hour
+
+// Convert lifespan strings to milliseconds
+function getLifespanInMs(lifespan) {
+    switch (lifespan) {
+        case "1h": return 60 * 60 * 1000;
+        case "1d": return 24 * 60 * 60 * 1000;
+        case "1w": return 7 * 24 * 60 * 60 * 1000;
+        default: return Infinity; // "forever"
+    }
+}
+
+
 def main():
     while True:
         try:

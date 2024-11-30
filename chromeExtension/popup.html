@@ -1,29 +1,40 @@
 <!DOCTYPE html>
 <html>
-    
+
 <head>
     <link rel="stylesheet" href="styles.css">
-
     <title>Smart Downloads Manager</title>
-
 </head>
 
 <body>
     <h3>Smart Downloads Manager</h3>
-    <p>Managing the download:</p>
+
+    <p>Last downloaded file: </p>
+    <div id="fileName" style="text-align: center; color:rgb(91, 188, 248)">Loading...</div> <!-- Placeholder for file name -->
+<br>
+    <div class="lifespan-container">
+        <label for="expiry">Its lifespan:</label>
+        <div class="dropdown-set">
+            <select id="expiry">
+                <option value="1h">1 Hour</option>
+                <option value="1d">1 Day</option>
+                <option value="1w">1 Week</option>
+                <option value="1m">1 Month</option>
+                <option value="inf">Forever</option>
+            </select>
+            <button id="setLifespan">Set</button>
+        </div>
+    </div>
+
+    <hr> <!-- Separator -->
+
     <br>
-    <p>Last downloaded file: 
-        <div id="fileName">Loading...</div> <!-- Placeholder for file name -->
-    </p>
-    
-    <label for="expiry">Choose lifespan:</label>
-    <select id="expiry">
-        <option value="1h">1 Hour</option>
-        <option value="1d">1 Day</option>
-        <option value="1w">1 Week</option>
-        <option value="forever">Forever</option>
-    </select>
-    <button id="setLifespan">Set Lifespan</button>
+    <p id="viewFilesToggle" class="view-files">View files ></p>
+    <div id="fileListContainer" class="file-list-container">
+        <ul id="fileList"></ul> <!-- Scrollable list for stored files -->
+    </div>
+
     <script src="popup.js"></script>
 </body>
+
 </html>
