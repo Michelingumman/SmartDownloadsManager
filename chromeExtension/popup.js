@@ -1,14 +1,17 @@
+
 document.addEventListener("DOMContentLoaded", () => {
     const fileNameElement = document.getElementById("fileName");
-    const lifespanSelector = document.getElementById("expiry");
-    const setLifespanButton = document.getElementById("setLifespan");
 
-    // Fetch the file name and display it
-    chrome.storage.local.get(["currentFileName", "currentDownloadId"], (result) => {
-        if (result.currentFileName) {
-            fileNameElement.textContent = result.currentFileName; // Show file name
+    // Fetch the latest downloaded file
+    chrome.downloads.search({ orderBy: ['-startTime'], limit: 1 }, (results) => {
+        if (results && results.length > 0) {
+            const latestFile = results[0];
+            fileNameElement.textContent = latestFile.filename.split(/[/\\]/).pop(); // Extract and display the file name
+        } else {
+            fileNameElement.textContent = "No recent downloads.";
         }
     });
+});
 
     // When the user clicks the "Set Lifespan" button
     setLifespanButton.addEventListener("click", () => {
