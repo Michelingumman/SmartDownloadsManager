@@ -1,0 +1,58 @@
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            width: 320px; /* Slightly wider for better usability */
+            height: auto;
+            background-color: #121212; /* Dark mode background */
+            color: #ffffff; /* Light text for contrast */
+            border-radius: 10px; /* Rounded corners for the popup */
+        }
+
+        h3 {
+            text-align: center;
+            color: #ffffff; /* White for headers */
+        }
+
+        p {
+            text-align: center;
+            color: #b3b3b3; /* Lighter text for descriptions */
+        }
+
+        label {
+            font-size: 14px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            background-color: #1f1f1f; /* Dark dropdown background */
+            color: #ffffff;
+            border: 1px solid #333333; /* Subtle border */
+            border-radius: 8px; /* Rounded corners */
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px; /* Rounded corners */
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        select:focus, button:focus {
+            outline: none; /* Remove outline for better aesthetics */
+        }
+    </style>
