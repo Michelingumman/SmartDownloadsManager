@@ -3,7 +3,10 @@
     "name": "Smart Downloads Manager",
     "version": "1.0",
     "description": "Manage your downloads by setting expiration times.",
-    "permissions": ["downloads", "storage"],
+    "permissions": [
+    "downloads",
+    "storage"
+    ],
     "background": {
         "service_worker": "background.js"
     },
