@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <h1>File Manager</h1>
+    <input type="text" id="filePath" placeholder="Enter file path" />
+    <button onclick="deleteFile()">Delete File</button>
+    <p id="message"></p>
+
+    <script>
+        const { ipcRenderer } = require('electron');
+
+        function deleteFile() {
+            const filePath = document.getElementById('filePath').value;
+            ipcRenderer.send('delete-file', filePath);
+
+            ipcRenderer.on('delete-file-reply', (event, response) => {
+                const messageElement = document.getElementById('message');
+                messageElement.innerText = response.message;
+            });
+        }
+    </script>
+</body>
+</html>
