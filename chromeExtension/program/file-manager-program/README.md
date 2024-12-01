@@ -24,21 +24,28 @@ file-manager-program/
 ```
 ---
 
-## How to Run / Build
-### Run the App in Development in the file-manager-program directory
-To run the app in development mode:
-
-    npm start
+## How to Build & Run
 
 ________
-### Build the App
+### Build the App 
+When you download the project you will not recieve the node-modules add have to create that yourself
+
+    npm install
 To package the app in to an installer:
 
     npm run build
 
 The resulting installer and build artifacts will be in the dist/ directory.
+To enjoy the build you run the executable in the dist dir:
+
+    dist/Smart Downloads Manager Setup 1.0.0.exe
 
 ----
+
+### Run the App in Development in the file-manager-program directory
+To run the app in development mode:
+
+    npm start
 
 
 # Cross-Platform Notes
