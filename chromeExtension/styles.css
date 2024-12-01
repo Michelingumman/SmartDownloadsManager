@@ -4,12 +4,13 @@ body {
     padding: 20px;
     width: 320px; /* Slightly wider for better usability */
     height: auto;
-    background-color: #121212; /* Dark mode background */
+    background-color: #1c1c1c; /* Dark mode background */
     color: #ffffff; /* Light text for contrast */
     border-radius: 10px; /* Rounded corners for the popup */
 }
 
 h3 {
+    margin-top: 1%;
     text-align: center;
     color: #ffffff; /* White for headers */
 }
@@ -80,6 +81,7 @@ button:hover {
     border: 1px solid #333333;
     border-radius: 8px; /* Rounded corners */
     margin-top: 10px;
+    line-height: 1.2rem;;
 }
 
 ul {

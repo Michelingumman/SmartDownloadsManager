@@ -1,0 +1,13 @@
+remake this file into .json and remove this line
+
+
+{
+    "name": "com.smartdownloadsmanager.host",
+    "description": "Native host for Smart Downloads Manager",
+    "path": "G:/My Drive/Adam/projektgrejs/Side-projects/SmartDownloadsManager/chromeExtension/windows",
+    "type": "stdio",
+    "allowed_origins": [
+        "chrome-extension://dmmnoakgckdbfaeknjlingcmpljoeogp/"
+    ]
+}
+

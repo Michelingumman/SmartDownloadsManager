@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     files.forEach((file) => {
                         const listItem = document.createElement("li");
-                        listItem.innerHTML = ` - <span>${file.fileName}</span>  | <span class="lifespan">(${file.lifespan})</span>`;
+                        listItem.innerHTML = ` [  ] - <span>${file.fileName}  </span> <span class="lifespan">( ${file.lifespan} )</span>`;
                         fileListElement.appendChild(listItem);
                     });
                 }
