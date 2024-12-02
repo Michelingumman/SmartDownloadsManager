@@ -1,7 +1,7 @@
 {
     "name": "com.smartdownloadsmanager.host",
     "description": "Native host for Smart Downloads Manager",
-    "path": "C:/_Projects/SmartDownloadsManager/chromeExtension/program/file-manager-program/dist/Smart Downloads Manager Setup 1.0.0.exe",
+    "path": "C:/_Projects/SmartDownloadsManager/chromeExtension/program/file-manager-program/fileManager.js",
     "type": "stdio",
     "allowed_origins": [
         "chrome-extension://dmmnoakgckdbfaeknjlingcmpljoeogp/"

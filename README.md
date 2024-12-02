@@ -13,7 +13,7 @@
    - Delete expired files automatically based on predefined rules.
 
 3. **Native Host Integration**:
-   - Communicate with a local program to enable operations like file deletion directly from the browser.
+   - Communicate with a local js script to enable operations like file deletion directly from the browser.
 
 ---
 
@@ -26,13 +26,8 @@ SmartDownloadsManager/
 │   │   ├── 128.png
 │   │   └── 240.png
 │   ├── program/               # Companion native file manager program
-│   │   ├── dist/              # Build files for the program
-│   │   ├── node_modules/      # Dependencies (if using npm for backend)
-│   │   ├── src/               # Source code for the file manager
-│   │   ├── fileManager.js     # Main file manager script
-│   │   ├── native-host.txt    # Native messaging host configuration
-│   │   ├── package.json       # Node.js configuration
-│   │   └── README.md          # Documentation for the native program
+│   │   ├── native-host.json   # Native messaging host configuration
+│   │   ├── fileManager.js     # Script for deleting files locally, talks via Native Messaging
 │   ├── background.js          # Service worker handling downloads and storage
 │   ├── manifest.json          # Chrome extension configuration
 │   ├── popup.html             # Popup window for user interaction
@@ -55,10 +50,10 @@ SmartDownloadsManager/
   - Lifespan (e.g., 1 hour, 1 day, forever)
 - Provides a **popup UI (`popup.html`)** for users to view and manage files.
 
-### 2. Native Host Program
+### 2. Native Host Script
 - A **native messaging host (`fileManager.js`)** enables local file deletion.
 - Configured via `native-host.json` to allow communication between the browser and local system.
-- Built using Node.js for cross-platform compatibility with electron-builder.
+- The fileManager.js script deletes files locally via Node.js when requested by the extension.
 
 ---
 
@@ -66,7 +61,7 @@ SmartDownloadsManager/
 
 ### Prerequisites
 1. Google Chrome or any Chromium-based browser.
-2. Node.js (for the companion program).
+2. Node.js installed on the user's machine (required to run the fileManager.js script).
 
 ### Steps to Install the Extension
 1. Clone or download the repository.
@@ -75,35 +70,39 @@ SmartDownloadsManager/
 4. Click **Load Unpacked** and select the `chromeExtension` directory.
 
 ### Setting Up the Native Host
-1. Navigate to the `program` directory.
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Build the program:
-   ```bash
-   npm run build, executable file in program/dist/
-   ```
-4. Register the native host:
-   - Copy `native-host.txt` (remake to .json) to the appropriate directory for your operating system:
-     - **Windows**: `%LOCALAPPDATA%/Google/Chrome/User Data/NativeMessagingHosts/`
-     - **macOS**: `~/Library/Application Support/Google/Chrome/NativeMessagingHosts/`
-     - **Linux**: `~/.config/google-chrome/NativeMessagingHosts/`
+1. Download the Script:
+   - Save fileManager.js in a location accessible to your system e.g. 
+   
+         C:\ProgramData\SmartDownloadsManager\
+      
 
----
+2. Register the Native Host:
+   - Copy the native-host.json file to the appropriate directory for your operating system:
+      - Windows:
 
-## Usage
+            %LOCALAPPDATA%\Google\Chrome\User Data\NativeMessagingHosts\
 
-1. Open the extension from the Chrome toolbar.
-2. View recent downloads, set expiration times, or delete expired files.
-3. The companion program handles local file deletion requests.
+      - macOS:
 
-### UI Elements
-- **Last Downloaded File**: Displays the most recent download.
-- **Lifespan Dropdown**: Set how long a file should be kept.
-- **View Files**: A list of tracked downloads with lifespans.
+            ~/Library/Application Support/Google/Chrome/NativeMessagingHosts/
 
----
+      - Linux:
+
+            ~/.config/google-chrome/NativeMessagingHosts/
+
+   - !!!! Update the path in native-host.json to point to the saved location of fileManager.js !!!
+   - Example native-host.json:
+
+         {
+            "name": "com.smartdownloadsmanager.host",
+            "description": "Native host for Smart Downloads Manager",
+            "path": "C:\\ProgramData\\SmartDownloadsManager\\fileManager.js",
+            "type": "stdio",
+            "allowed_origins": [
+               "chrome-extension://<extension-id>/"
+            ]
+         }
+
 
 ## Development
 
@@ -122,9 +121,22 @@ SmartDownloadsManager/
 
 ---
 
+## Troubleshooting
+1. **"File Deletion Not Working"**:
+
+   - Verify that Node.js is installed and accessible from the command line.
+   - Ensure the native-host.json file is correctly registered and points to the location of fileManager.js.
+
+2. **"Native Host Not Found"**:
+
+   - Confirm the native-host.json file is in the correct directory.
+   - Restart your browser after making changes to native-host.json.
+
+---
+
 ## Contributions
 Contributions are welcome! Feel free to fork the repository and submit a pull request.
 
 ---
 
-For more details or troubleshooting, refer to the individual README files in the `program` directory. If you encounter issues, open an issue on the repository or contact the maintainer "me" :)
+For more details or troubleshooting, i wish u good luck! If you encounter issues, open an issue on the repository or contact the maintainer "me" :)
