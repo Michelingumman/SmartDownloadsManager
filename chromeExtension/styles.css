@@ -99,3 +99,31 @@ span.lifespan {
     color: #70b4fd; /* Subtle blue for lifespan */
     font-style: italic;
 }
+
+
+
+.advanced-mode-button {
+    margin-top: 0px;
+    padding: 4px;
+    width: auto;
+    background-color: transparent;
+    color: #6d6d6d;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+}
+
+.advanced-mode-button:hover {
+    background-color: #333;
+}
+
+.advanced-mode-container {
+    margin-top: 0px;
+    padding: 10px;
+    background-color: #292929;
+    border-radius: 8px;
+}

@@ -6,6 +6,44 @@ document.addEventListener("DOMContentLoaded", () => {
     const fileListContainer = document.getElementById("fileListContainer");
     const fileListElement = document.getElementById("fileList");
 
+
+
+    const advancedModeToggle = document.getElementById("advancedModeToggle");
+    const advancedModeContainer = document.getElementById("advancedModeContainer");
+    const testDeleteFileButton = document.getElementById("testDeleteFile");
+    const testFilePathInput = document.getElementById("testFilePath");
+    const testResponse = document.getElementById("testResponse");
+
+
+    // Toggle Advanced Mode
+    advancedModeToggle.addEventListener("click", () => {
+        if (advancedModeContainer.style.display === "none") {
+            advancedModeContainer.style.display = "block";
+            advancedModeToggle.textContent = "Close Advanced Mode";
+        } else {
+            advancedModeContainer.style.display = "none";
+            advancedModeToggle.textContent = "Advanced Mode";
+        }
+    });
+
+    // Test Delete File
+    testDeleteFileButton.addEventListener("click", () => {
+        const filePath = testFilePathInput.value.trim();
+        if (!filePath) {
+            testResponse.textContent = "Please enter a valid file path.";
+            return;
+        }
+
+        chrome.runtime.sendMessage({ command: "testDelete", filePath }, (response) => {
+            if (chrome.runtime.lastError) {
+                testResponse.textContent = `Error: ${chrome.runtime.lastError.message}`;
+            } else {
+                testResponse.textContent = response.message || "No response from native host.";
+            }
+        });
+    });
+    
+
     // Fetch the latest downloaded file
     chrome.downloads.search({ orderBy: ['-startTime'], limit: 1 }, (results) => {
         if (results && results.length > 0) {

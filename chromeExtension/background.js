@@ -97,3 +97,48 @@ function getLifespanInMs(lifespan) {
         default: return Infinity; // "inf"
     }
 }
+
+
+
+
+chrome.runtime.sendNativeMessage(
+    "com.smartdownloadsmanager.host",
+    { command: "test", message: "Hello, native host!" },
+    (response) => {
+        if (chrome.runtime.lastError) {
+            console.error("Error:", chrome.runtime.lastError.message);
+        } else {
+            console.log("Response from native host:", response);
+        }
+    }
+);
+
+
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    console.log("Received message from popup:", message);
+
+    if (message.command === "testDelete") {
+        const { filePath } = message;
+
+        chrome.runtime.sendNativeMessage(
+            "com.smartdownloadsmanager.host",
+            { command: "delete", filePath },
+            (response) => {
+                console.log("Response from native host:", response);
+
+                if (chrome.runtime.lastError) {
+                    sendResponse({ status: "error", message: `Error: ${chrome.runtime.lastError.message}` });
+                } else if (!response || response.status === "error") {
+                    sendResponse({ status: "error", message: response ? response.message : "No response" });
+                } else {
+                    sendResponse({ status: "success", message: response.message });
+                }
+            }
+        );
+
+        return true; // Keep the message port open for async response
+    }
+});
+
+

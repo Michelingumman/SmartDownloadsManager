@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <link rel="stylesheet" href="styles.css">
     <title>Smart Downloads Manager</title>
 </head>
-
 <body>
     <h3>Smart Downloads Manager</h3>
 
+
+
     <p>Last downloaded file: </p>
-    <div id="fileName" style="text-align: center; color:rgb(91, 188, 248)">Loading...</div> <!-- Placeholder for file name -->
-<br>
+    <div id="fileName" style="text-align: center; color:rgb(91, 188, 248)">Loading...</div>
+
     <div class="lifespan-container">
         <label for="expiry">Its lifespan:</label>
         <div class="dropdown-set">
@@ -26,15 +26,32 @@
         </div>
     </div>
 
-    <hr> <!-- Separator -->
-
-    <br>
+    <hr>
     <p id="viewFilesToggle" class="view-files">View files ></p>
     <div id="fileListContainer" class="file-list-container">
-        <ul id="fileList"></ul> <!-- Scrollable list for stored files -->
+        <ul id="fileList"></ul>
     </div>
+
+    <br>
+    
+    
+    <button id="advancedModeToggle" class="advanced-mode-button">Advanced Mode</button>
+    <br>
+    
+    <div id="advancedModeContainer" class="advanced-mode-container" style="display: none;">
+        <h3 style="text-decoration: underline;">Advanced Mode</h3>
+        <h4>Test Communication to Local Script</h4>
+        <input type="text" id="testFilePath" placeholder="Enter file path to delete" />
+        <br>
+        <br>
+        
+        <button id="testDeleteFile">Test Delete File</button>
+        <div id="testResponse" style="color: #c1c1c1; margin-top: 10px;">Response will appear here.</div>
+        <hr>
+    </div>
+
+
 
     <script src="popup.js"></script>
 </body>
-
 </html>

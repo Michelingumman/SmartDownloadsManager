@@ -69,41 +69,40 @@ SmartDownloadsManager/
 3. Enable **Developer Mode** (toggle at the top-right).
 4. Click **Load Unpacked** and select the `chromeExtension` directory.
 
-### Setting Up the Native Host
-1. Download the Script:
-   - Save fileManager.js in a location accessible to your system e.g. 
+### Setting Up the Local Script
+Download the **fileManager.js** and **native-host.json**:
+   1. Save the **fileManager.js** in a location accessible to your system e.g. 
    
-         C:\ProgramData\SmartDownloadsManager\
-      
+            C:\SmartDownloadsManager\
+            ├── fileManager.js        # The native messaging script
 
-2. Register the Native Host:
-   - Copy the native-host.json file to the appropriate directory for your operating system:
-      - Windows:
+   2. Chrome requires **native_host.json** to be placed in specific directories depending on the operating system.
+         - Windows:
 
-            %LOCALAPPDATA%\Google\Chrome\User Data\NativeMessagingHosts\
+               %LOCALAPPDATA%\Google\Chrome\User Data\NativeMessagingHosts\
+         - macOS:
 
-      - macOS:
+               ~/Library/Application Support/Google/Chrome/NativeMessagingHosts/
 
-            ~/Library/Application Support/Google/Chrome/NativeMessagingHosts/
+         - Linux:
 
-      - Linux:
-
-            ~/.config/google-chrome/NativeMessagingHosts/
-
-   - !!!! Update the path in native-host.json to point to the saved location of fileManager.js !!!
-   - Example native-host.json:
-
-         {
-            "name": "com.smartdownloadsmanager.host",
-            "description": "Native host for Smart Downloads Manager",
-            "path": "C:\\ProgramData\\SmartDownloadsManager\\fileManager.js",
-            "type": "stdio",
-            "allowed_origins": [
-               "chrome-extension://<extension-id>/"
-            ]
-         }
+               ~/.config/google-chrome/NativeMessagingHosts/
 
 
+      - **!!! Update the path in native-host.json to point to the saved location of fileManager.js !!!**
+      - Example native-host.json:
+
+            {
+               "name": "com.smartdownloadsmanager.host",
+               "description": "Native host for Smart Downloads Manager",
+               "path": "C:/SmartDownloadsManager/fileManager.js",
+               "type": "stdio",
+               "allowed_origins": [
+                  "chrome-extension://<extension-id>/"
+               ]
+            }
+
+   3. This can be done automatically by running the **smartdownloadsmanager_install.bat** on windows, remember to update the native-host.json first tho
 ## Development
 
 ### Key Scripts
