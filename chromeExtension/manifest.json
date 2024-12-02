@@ -5,7 +5,8 @@
     "description": "Manage your downloads by setting expiration times.",
     "permissions": [
     "downloads",
-    "storage"
+    "storage",
+    "notifications"
     ],
     "background": {
         "service_worker": "background.js"

@@ -48,9 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     listItem.textContent = "No files stored.";
                     fileListElement.appendChild(listItem);
                 } else {
-                    files.forEach((file) => {
+                    files.reverse().forEach((file, index) => {
                         const listItem = document.createElement("li");
-                        listItem.innerHTML = ` [  ] - <span>${file.fileName}  </span> <span class="lifespan">( ${file.lifespan} )</span>`;
+                        listItem.innerHTML = ` [${index + 1}] - <span>${file.fileName}  </span> <span class="lifespan">( ${file.lifespan} )</span>`;
                         fileListElement.appendChild(listItem);
                     });
                 }

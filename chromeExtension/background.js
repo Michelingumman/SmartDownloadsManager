@@ -1,13 +1,16 @@
 chrome.runtime.onInstalled.addListener(() => {
-    chrome.notifications.create({
+    chrome.notifications.create("install-notification", {
         type: "basic",
         iconUrl: "icons/240.png",
         title: "Smart Downloads Manager",
         message: "Install the companion file manager to enable local file deletion in the downloads folder"
+    }, () => {
+        if (chrome.runtime.lastError) {
+            console.error("Notification Error:", chrome.runtime.lastError.message);
+        }
     });
-
-    chrome.tabs.create({ url: "https://yourwebsite.com/download" });
 });
+
 
 // Example: Delete a file via native messaging
 function deleteFile(filePath) {
@@ -30,21 +33,29 @@ chrome.runtime.onInstalled.addListener(() => {
     });
 });
 
-// Store download metadata on creation
+
+// Listen for download creation
 chrome.downloads.onCreated.addListener((downloadItem) => {
     const downloadTime = new Date().getTime();
-
     chrome.downloads.onChanged.addListener((delta) => {
         if (delta.id === downloadItem.id && delta.filename) {
             const fileName = delta.filename.current.split(/[/\\]/).pop();
 
+            // Fetch current files from storage
             chrome.storage.local.get("files", (data) => {
                 const files = data.files || [];
+
+                // Add the new file with its metadata
                 files.push({
                     fileName: fileName,
-                    lifespan: "inf",
+                    lifespan: "inf", // Default lifespan
                     downloadTime: downloadTime,
-                    id: delta.id,
+                    id: downloadItem.id,
+                });
+
+                // Save back to storage
+                chrome.storage.local.set({ files: files }, () => {
+                    console.log("Updated files in storage:", files);
                 });
             });
         }
