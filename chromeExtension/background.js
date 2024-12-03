@@ -1,14 +1,19 @@
 chrome.runtime.onInstalled.addListener(() => {
-    chrome.notifications.create("install-notification", {
-        type: "basic",
-        iconUrl: "icons/240.png",
-        title: "Smart Downloads Manager",
-        message: "Install the companion file manager to enable local file deletion in the downloads folder"
-    }, () => {
-        if (chrome.runtime.lastError) {
-            console.error("Notification Error:", chrome.runtime.lastError.message);
+    chrome.notifications.create(
+        "install-notification",
+        {
+            type: "basic",
+            iconUrl: "icons/240.png",
+            title: "Smart Downloads Manager",
+            message: "Install the companion file manager to enable local file deletion in the downloads folder"
+        },
+        () => {
+            if (chrome.runtime.lastError) {
+                console.error("Notification Error:", chrome.runtime.lastError.message);
+            }
         }
-    });
+    );
+    
 });
 
 
@@ -112,33 +117,5 @@ chrome.runtime.sendNativeMessage(
         }
     }
 );
-
-
-
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    console.log("Received message from popup:", message);
-
-    if (message.command === "testDelete") {
-        const { filePath } = message;
-
-        chrome.runtime.sendNativeMessage(
-            "com.smartdownloadsmanager.host",
-            { command: "delete", filePath },
-            (response) => {
-                console.log("Response from native host:", response);
-
-                if (chrome.runtime.lastError) {
-                    sendResponse({ status: "error", message: `Error: ${chrome.runtime.lastError.message}` });
-                } else if (!response || response.status === "error") {
-                    sendResponse({ status: "error", message: response ? response.message : "No response" });
-                } else {
-                    sendResponse({ status: "success", message: response.message });
-                }
-            }
-        );
-
-        return true; // Keep the message port open for async response
-    }
-});
 
 

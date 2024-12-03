@@ -1,3 +1,12 @@
+
+
+console.log("fileManager.js started...");
+console.log(".");
+console.log(".");
+console.log(".");
+
+
+
 const fs = require("fs").promises;
 
 // Function to handle incoming messages
@@ -15,6 +24,9 @@ async function handleMessage(message) {
 
     return { status: "error", message: "Unknown command" };
 }
+
+
+console.log("Reading input from stdin");
 
 // Read input from stdin
 process.stdin.on("data", async (data) => {

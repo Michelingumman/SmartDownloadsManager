@@ -15,6 +15,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const testResponse = document.getElementById("testResponse");
 
 
+
+    // // Test Delete File
+    // testDeleteFileButton.addEventListener("click", () => {
+        
+    //     chrome.runtime.sendNativeMessage(
+    //         'com.smartdownloadsmanager.host',
+    //         {text: 'Hello'},
+    //         function (response) {
+    //         console.log('Received ' + response);
+    //         }
+    //     );
+    //     // const filePath = testFilePathInput.value.trim();
+    //     // if (!filePath) {
+    //     //     testResponse.textContent = "Please enter a valid file path.";
+    //     //     return;
+    //     // }
+
+    //     // chrome.runtime.sendMessage({ command: "testDelete", filePath }, (response) => {
+    //     //     if (chrome.runtime.lastError) {
+    //     //         testResponse.textContent = `Error: ${chrome.runtime.lastError.message}`;
+    //     //     } else {
+    //     //         testResponse.textContent = response.message || "No response from native host.";
+    //     //     }
+    //     // });
+    // });
+
     // Toggle Advanced Mode
     advancedModeToggle.addEventListener("click", () => {
         if (advancedModeContainer.style.display === "none") {
@@ -26,23 +52,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Test Delete File
-    testDeleteFileButton.addEventListener("click", () => {
-        const filePath = testFilePathInput.value.trim();
-        if (!filePath) {
-            testResponse.textContent = "Please enter a valid file path.";
-            return;
-        }
 
-        chrome.runtime.sendMessage({ command: "testDelete", filePath }, (response) => {
-            if (chrome.runtime.lastError) {
-                testResponse.textContent = `Error: ${chrome.runtime.lastError.message}`;
-            } else {
-                testResponse.textContent = response.message || "No response from native host.";
-            }
-        });
-    });
-    
+
+
+
+
+
+
+
+
 
     // Fetch the latest downloaded file
     chrome.downloads.search({ orderBy: ['-startTime'], limit: 1 }, (results) => {
@@ -74,6 +92,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+
+
+
+
+
     // Toggle the view files section
     viewFilesToggle.addEventListener("click", () => {
         if (fileListContainer.style.display === "none") {
@@ -101,4 +124,13 @@ document.addEventListener("DOMContentLoaded", () => {
             viewFilesToggle.textContent = "View files >";
         }
     });
+
+
+
+
+
+
+
+
+
 });
