@@ -26,8 +26,9 @@ SmartDownloadsManager/
 │   │   ├── 128.png
 │   │   └── 240.png
 │   ├── program/               # Companion native file manager program
-│   │   ├── native-host.json   # Native messaging host configuration
 │   │   ├── fileManager.js     # Script for deleting files locally, talks via Native Messaging
+│   │   ├── native-host.json   # Native messaging host configuration
+│   │   ├── installer.bat      # Installer file for Windows that places json and js correctly
 │   ├── background.js          # Service worker handling downloads and storage
 │   ├── manifest.json          # Chrome extension configuration
 │   ├── popup.html             # Popup window for user interaction
