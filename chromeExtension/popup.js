@@ -6,40 +6,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const fileListContainer = document.getElementById("fileListContainer");
     const fileListElement = document.getElementById("fileList");
 
-
-
     const advancedModeToggle = document.getElementById("advancedModeToggle");
     const advancedModeContainer = document.getElementById("advancedModeContainer");
     const testDeleteFileButton = document.getElementById("testDeleteFile");
-    const testFilePathInput = document.getElementById("testFilePath");
     const testResponse = document.getElementById("testResponse");
 
-
-
-    // // Test Delete File
-    // testDeleteFileButton.addEventListener("click", () => {
-        
-    //     chrome.runtime.sendNativeMessage(
-    //         'com.smartdownloadsmanager.host',
-    //         {text: 'Hello'},
-    //         function (response) {
-    //         console.log('Received ' + response);
-    //         }
-    //     );
-    //     // const filePath = testFilePathInput.value.trim();
-    //     // if (!filePath) {
-    //     //     testResponse.textContent = "Please enter a valid file path.";
-    //     //     return;
-    //     // }
-
-    //     // chrome.runtime.sendMessage({ command: "testDelete", filePath }, (response) => {
-    //     //     if (chrome.runtime.lastError) {
-    //     //         testResponse.textContent = `Error: ${chrome.runtime.lastError.message}`;
-    //     //     } else {
-    //     //         testResponse.textContent = response.message || "No response from native host.";
-    //     //     }
-    //     // });
-    // });
+    // Test communication with the native host
+    testDeleteFileButton.addEventListener("click", () => {
+        chrome.runtime.sendNativeMessage(
+            "com.smartdownloadsmanager.host",
+            { command: "test", message: "Hello, native host!" }, // Send a test message
+            (response) => {
+                if (chrome.runtime.lastError) {
+                    console.error("Error:", chrome.runtime.lastError.message);
+                    testResponse.textContent = `Error: ${chrome.runtime.lastError.message}`;
+                    testResponse.style.color = "red"; // Set response color to red for errors
+                } else {
+                    console.log("Received response:", response);
+                    testResponse.textContent = `Response: ${response.message}`;
+                    testResponse.style.color = "green"; // Set response color to green for success
+                }
+            }
+        );
+    });
 
     // Toggle Advanced Mode
     advancedModeToggle.addEventListener("click", () => {
@@ -51,16 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
             advancedModeToggle.textContent = "Advanced Mode";
         }
     });
-
-
-
-
-
-
-
-
-
-
 
     // Fetch the latest downloaded file
     chrome.downloads.search({ orderBy: ['-startTime'], limit: 1 }, (results) => {
@@ -92,11 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-
-
-
-
-
     // Toggle the view files section
     viewFilesToggle.addEventListener("click", () => {
         if (fileListContainer.style.display === "none") {
@@ -124,13 +98,4 @@ document.addEventListener("DOMContentLoaded", () => {
             viewFilesToggle.textContent = "View files >";
         }
     });
-
-
-
-
-
-
-
-
-
 });

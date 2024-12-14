@@ -105,7 +105,10 @@ function getLifespanInMs(lifespan) {
 
 
 
-
+// activat this to enable background tracking ofthe 
+// |
+// |
+// V
 chrome.runtime.sendNativeMessage(
     "com.smartdownloadsmanager.host",
     { command: "test", message: "Hello, native host!" },

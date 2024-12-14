@@ -1,9 +1,21 @@
 
 
-console.log("fileManager.js started...");
-console.log(".");
-console.log(".");
-console.log(".");
+process.stdin.on("data", () => {
+    process.stdout.write(JSON.stringify({ status: "success", message: "Native host is running!" }));
+});
+
+
+process.stdin.on("data", (data) => {
+    try {
+        const input = JSON.parse(data.toString());
+        console.log("Received input:", input);
+        // Send a success response
+        process.stdout.write(JSON.stringify({ status: "success", message: "Native host is working!" }));
+    } catch (error) {
+        console.error("Error parsing input:", error.message);
+        process.stdout.write(JSON.stringify({ status: "error", message: error.message }));
+    }
+});
 
 
 
