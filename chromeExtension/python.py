@@ -8,7 +8,7 @@ try:
     data = f"time: {hour}:{minut}:{sec}\n"
 
     # Attempt to write to log
-    with open("C:/_Projects/SmartDownloadsManager/chromeExtension/program/log.txt", "a") as log:
+    with open("C:/_Projects/SmartDownloadsManager/chromeExtension/log.txt", "a") as log:
         log.write("Python script started...\n")
         log.write(data)
 
