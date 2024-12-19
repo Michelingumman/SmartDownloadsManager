@@ -8,11 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const advancedModeToggle = document.getElementById("advancedModeToggle");
     const advancedModeContainer = document.getElementById("advancedModeContainer");
+    const testCommunicationButton = document.getElementById("testCommunication");
     const testDeleteFileButton = document.getElementById("testDeleteFile");
     const testResponse = document.getElementById("testResponse");
+    const deletingResponse = document.getElementById("deletingResponse");
 
     // Test communication with the native host
-    testDeleteFileButton.addEventListener("click", () => {
+    testCommunicationButton.addEventListener("click", () => {
         chrome.runtime.sendNativeMessage(
             "com.smartdownloadsmanager.host",
             { command: "test", message: "Hello, native host!" }, // Send a test message
@@ -29,6 +31,34 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         );
     });
+
+     // Test deleting a file
+    testDeleteFileButton.addEventListener("click", () => {
+        const filePathInput = document.getElementById("testFilePath").value.trim();
+
+        if (!filePathInput) {
+            deletingResponse.textContent = "Error: Please enter a valid file path.";
+            deletingResponse.style.color = "red";
+            return;
+        }
+
+        chrome.runtime.sendNativeMessage(
+            "com.smartdownloadsmanager.host",
+            { command: "delete_file", message: filePathInput }, // Send the file path to delete
+            (response) => {
+                if (chrome.runtime.lastError) {
+                    console.error("Error:", chrome.runtime.lastError.message);
+                    deletingResponse.textContent = `Error: ${chrome.runtime.lastError.message}`;
+                    deletingResponse.style.color = "red"; // Set response color to red for errors
+                } else {
+                    console.log("Response from native host:", response);
+                    deletingResponse.textContent = `Response: ${response.message}`;
+                    deletingResponse.style.color = response.status === "success" ? "green" : "red";
+                }
+            }
+        );
+    });
+
 
     // Toggle Advanced Mode
     advancedModeToggle.addEventListener("click", () => {

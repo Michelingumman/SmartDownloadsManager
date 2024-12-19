@@ -1,20 +1,20 @@
-chrome.runtime.onInstalled.addListener(() => {
-    chrome.notifications.create(
-        "install-notification",
-        {
-            type: "basic",
-            iconUrl: "icons/240.png",
-            title: "Smart Downloads Manager",
-            message: "Install the companion file manager to enable local file deletion in the downloads folder"
-        },
-        () => {
-            if (chrome.runtime.lastError) {
-                console.error("Notification Error:", chrome.runtime.lastError.message);
-            }
-        }
-    );
+// chrome.runtime.onInstalled.addListener(() => {
+//     chrome.notifications.create(
+//         "install-notification",
+//         {
+//             type: "basic",
+//             iconUrl: "icons/240.png",
+//             title: "Smart Downloads Manager",
+//             message: "Install the companion file manager to enable local file deletion in the downloads folder"
+//         },
+//         () => {
+//             if (chrome.runtime.lastError) {
+//                 console.error("Notification Error:", chrome.runtime.lastError.message);
+//             }
+//         }
+//     );
     
-});
+// });
 
 
 // Example: Delete a file via native messaging
@@ -109,16 +109,16 @@ function getLifespanInMs(lifespan) {
 // |
 // |
 // V
-chrome.runtime.sendNativeMessage(
-    "com.smartdownloadsmanager.host",
-    { command: "test", message: "Hello, native host!" },
-    (response) => {
-        if (chrome.runtime.lastError) {
-            console.error("Error:", chrome.runtime.lastError.message);
-        } else {
-            console.log("Response from native host:", response);
-        }
-    }
-);
+// chrome.runtime.sendNativeMessage(
+//     "com.smartdownloadsmanager.host",
+//     { command: "test", message: "Hello, native host!" },
+//     (response) => {
+//         if (chrome.runtime.lastError) {
+//             console.error("Error:", chrome.runtime.lastError.message);
+//         } else {
+//             console.log("Response from native host:", response);
+//         }
+//     }
+// );
 
 

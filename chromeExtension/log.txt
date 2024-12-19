@@ -1,0 +1,19 @@
+Communication received at 01:01:13:
+Command: test
+Message: Hello, native host!
+Communication working!
+-------------
+Communication received at 01:01:22:
+Command: delete_file
+Message: byebye.txt
+Communication working!
+-------------
+File 'byebye.txt' deleted successfully from Downloads folder.
+-------------
+Communication received at 01:02:14:
+Command: delete_file
+Message: byebye.txt
+Communication working!
+-------------
+File 'byebye.txt' deleted successfully from Downloads folder.
+-------------

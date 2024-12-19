@@ -53,7 +53,7 @@ button {
     border: none;
     border-radius: 8px; /* Rounded corners */
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 2px;
 }
 
 button:hover {
