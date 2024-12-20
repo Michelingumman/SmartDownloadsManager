@@ -13,6 +13,69 @@ document.addEventListener("DOMContentLoaded", () => {
     const testResponse = document.getElementById("testResponse");
     const deletingResponse = document.getElementById("deletingResponse");
 
+    const lifespans = ["1h", "1d", "1w", "1m", "inf"]; // Cycle options
+
+    // Function to cycle lifespan
+    function getNextLifespan(current) {
+        const index = lifespans.indexOf(current);
+        return lifespans[(index + 1) % lifespans.length];
+    }
+
+    // Update the view files list
+    function updateFileList() {
+        chrome.storage.local.get("files", (data) => {
+            const files = data.files || [];
+            fileListElement.innerHTML = ""; // Clear existing list
+
+            files.forEach((file, index) => {
+                const listItem = document.createElement("li");
+                listItem.innerHTML = `
+                    [${index + 1}] - <span class="file-name">${file.fileName}</span>
+                    <span class="lifespan">(${file.lifespan})</span>
+                `;
+                listItem.classList.add("file-item");
+                listItem.dataset.index = index;
+                listItem.dataset.lifespan = file.lifespan; // Store lifespan for reference
+
+                fileListElement.appendChild(listItem);
+            });
+        });
+    }
+
+    fileListElement.addEventListener("click", (event) => {
+        const listItem = event.target.closest(".file-item");
+        if (!listItem) {
+            console.log("Click not on a file item.");
+            return;
+        }
+    
+        console.log("File clicked:", listItem);
+    
+        const index = parseInt(listItem.dataset.index, 10);
+        const currentLifespan = listItem.dataset.lifespan;
+    
+        // Cycle to the next lifespan
+        const newLifespan = getNextLifespan(currentLifespan);
+        listItem.dataset.lifespan = newLifespan; // Update dataset
+        listItem.querySelector(".lifespan").textContent = `(${newLifespan})`; // Update UI
+    
+        // Update storage
+        chrome.storage.local.get("files", (data) => {
+            const files = data.files || [];
+            if (files[index]) {
+                files[index].lifespan = newLifespan; // Update the lifespan
+                chrome.storage.local.set({ files }); // Save updated list
+                console.log(`Lifespan updated to ${newLifespan}`);
+            } else {
+                console.error("File index not found in storage.");
+            }
+        });
+    });
+    
+
+    // Initial render of the file list
+    updateFileList();
+
     // Test communication with the native host
     testCommunicationButton.addEventListener("click", () => {
         chrome.runtime.sendNativeMessage(
@@ -129,3 +192,4 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+

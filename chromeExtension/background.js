@@ -17,6 +17,24 @@
 // });
 
 
+
+chrome.downloads.onCreated.addListener((downloadItem) => {
+    const downloadTime = new Date().getTime();
+    chrome.storage.local.get("files", (data) => {
+        const files = data.files || [];
+        files.push({
+            fileName: downloadItem.filename,
+            lifespan: "inf",
+            downloadTime: downloadTime,
+        });
+
+        chrome.storage.local.set({ files }, () => {
+            console.log("Added file to storage:", downloadItem.filename);
+        });
+    });
+});
+
+
 // Example: Delete a file via native messaging
 function deleteFile(filePath) {
     chrome.runtime.sendNativeMessage(

@@ -1,101 +1,19 @@
-Communication received at 01:01:13:
+Communication received at 18:24:19:
 Command: test
 Message: Hello, native host!
 Communication working!
 -------------
-Communication received at 01:01:22:
+Communication received at 18:25:43:
 Command: delete_file
-Message: byebye.txt
+Message: Lecture 1_Slides (6).pdf
 Communication working!
 -------------
-File 'byebye.txt' deleted successfully from Downloads folder.
+File 'Lecture 1_Slides (6).pdf' deleted successfully from Downloads folder.
 -------------
-Communication received at 01:02:14:
+Communication received at 18:25:52:
 Command: delete_file
-Message: byebye.txt
+Message: Lecture 1_Slides (5).pdf
 Communication working!
 -------------
-File 'byebye.txt' deleted successfully from Downloads folder.
--------------
-Error: cannot read more than 33554432 bytes
--------------
-Error: cannot read more than 33554432 bytes
--------------
-Error: cannot read more than 33554432 bytes
--------------
-No message received!
--------------
-Error: cannot read more than 33554432 bytes
--------------
-Error: cannot read more than 33554432 bytes
--------------
-Error: [Errno 32] Broken pipe
--------------
--------------
--------------
--------------
--------------
--------------
--------------
--------------
--------------
--------------
-----NEW-----
-Error: [Errno 32] Broken pipe
--------------
-Error: [Errno 32] Broken pipe
--------------
-Error: [Errno 32] Broken pipe
--------------
-Communication received at 14:52:36:
-Command: test
-Message: Hello, native host!
-Communication working!
--------------
-Communication received at 14:53:02:
-Command: delete_file
-Message: lecture2.pdf
-Communication working!
--------------
-File 'lecture2.pdf' deleted successfully from Downloads folder.
--------------
-Error while reading message: cannot read more than 33554432 bytes
--------------
-No message received!
--------------
-
-
-
-
-
---------
-
-Communication received at 16:47:14:
-Command: test
-Message: Hello, native host!
-Communication working!
--------------
-Communication received at 17:07:19:
-Command: test
-Message: Hello, native host!
-Communication working!
--------------
-Communication received at 17:07:58:
-Command: delete_file
-Message: Analog-Project
-Communication working!
--------------
-File 'Analog-Project' not found in Downloads folder.
--------------
-Communication received at 17:08:04:
-Command: delete_file
-Message: Analog-Project.pdf
-Communication working!
--------------
-File 'Analog-Project.pdf' deleted successfully from Downloads folder.
--------------
-Communication received at 17:08:23:
-Command: test
-Message: Hello, native host!
-Communication working!
+File 'Lecture 1_Slides (5).pdf' deleted successfully from Downloads folder.
 -------------

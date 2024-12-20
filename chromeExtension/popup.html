@@ -9,6 +9,8 @@
 
 
 
+    <!-- File Lifespan Section -->
+
     <p>Last downloaded file: </p>
     <div id="fileName" style="text-align: center; color:rgb(91, 188, 248)">Loading...</div>
 
@@ -26,11 +28,17 @@
         </div>
     </div>
 
+
+    <!-- View Files Section -->
     <hr>
     <p id="viewFilesToggle" class="view-files">View files ></p>
-    <div id="fileListContainer" class="file-list-container">
+    <div id="fileListContainer" class="file-list-container" style="display: none;">
         <ul id="fileList"></ul>
+        <p id="fileInstructions" style="text-align: center; color: gray;">
+            Click on a file to toggle its lifespan.
+        </p>
     </div>
+    
 
     <br>
     
