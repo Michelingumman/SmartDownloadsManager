@@ -30,7 +30,13 @@ Smart Downloads Manager is a Chrome extension that allows users to manage their 
    - Updates the `smartdownloadsmanager.json` file with the correct paths.
    - Adds a registry key for Chrome's Native Messaging Host.
 
-4. **Verify Installation**
+4. **Upload the Extension**
+   - Navigate to `chrome://extensions` in Chrome.
+   - Enable Developer Mode and select "Load Unpacked Extension."
+   - Upload the `chromeExtension` folder.
+   - Note the **Extension ID** and manually add it to the `smartdownloadsmanager.json` file under the `allowed_origins` key.
+
+5. **Verify Installation**
    - Check the installation log at `installer/install.log` for any errors.
    - Confirm that the extension can communicate with the native Python script by pressing the "Test Communication" button in the extension popup.
 
@@ -55,7 +61,13 @@ Smart Downloads Manager is a Chrome extension that allows users to manage their 
    - Updates the `smartdownloadsmanager.json` file with the correct paths.
    - Places the JSON file in `~/Library/Application Support/Google/Chrome/NativeMessagingHosts/`.
 
-4. **Verify Installation**
+4. **Upload the Extension**
+   - Navigate to `chrome://extensions` in Chrome.
+   - Enable Developer Mode and select "Load Unpacked Extension."
+   - Upload the `chromeExtension` folder.
+   - Note the **Extension ID** and manually add it to the `smartdownloadsmanager.json` file under the `allowed_origins` key.
+
+5. **Verify Installation**
    - Check the installation log at `installer/install.log` for any errors.
    - Confirm that the extension can communicate with the native Python script by pressing the "Test Communication" button in the extension popup.
 
@@ -83,7 +95,7 @@ Smart Downloads Manager is a Chrome extension that allows users to manage their 
 1. **Install the Chrome Extension**
    - Load the extension manually by enabling Developer Mode in Chrome and selecting "Load Unpacked Extension."
    - Point to the `chromeExtension` folder.
-   - Navigate to `installer/installer.bat` or `.sh` and run the file
+   - Navigate to `installer/installer.bat` or `.sh` and run the file.
 
 2. **Test Communication**
    - Open the extension popup and press the "Test Communication" button.
