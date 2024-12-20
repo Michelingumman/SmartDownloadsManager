@@ -17,3 +17,25 @@ Communication working!
 -------------
 File 'Lecture 1_Slides (5).pdf' deleted successfully from Downloads folder.
 -------------
+Communication received at 20:22:38:
+Command: test
+Message: Hello, native host!
+Communication working!
+-------------
+Communication received at 21:38:55:
+Command: test
+Message: Hello, native host!
+Communication working!
+-------------
+Communication received at 21:50:34:
+Command: delete_file
+Message: Lecture 1_Slides (5).pdf
+Communication working!
+-------------
+File 'Lecture 1_Slides (5).pdf' deleted successfully from Downloads folder.
+-------------
+Communication received at 21:50:49:
+Command: test
+Message: Hello, native host!
+Communication working!
+-------------

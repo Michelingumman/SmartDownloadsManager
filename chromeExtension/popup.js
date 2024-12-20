@@ -21,12 +21,22 @@ document.addEventListener("DOMContentLoaded", () => {
         return lifespans[(index + 1) % lifespans.length];
     }
 
-    // Update the view files list
-    function updateFileList() {
+     // Updated: Ensure visibility and debug logs
+     function updateFileList() {
         chrome.storage.local.get("files", (data) => {
             const files = data.files || [];
+            console.log("Fetched files from storage:", files);
             fileListElement.innerHTML = ""; // Clear existing list
 
+            if (files.length === 0) {
+                const listItem = document.createElement("li");
+                listItem.textContent = "No files stored.";
+                listItem.style.color = "gray";
+                fileListElement.appendChild(listItem);
+                return;
+            }
+
+            // Populate list dynamically
             files.forEach((file, index) => {
                 const listItem = document.createElement("li");
                 listItem.innerHTML = `
@@ -35,45 +45,48 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
                 listItem.classList.add("file-item");
                 listItem.dataset.index = index;
-                listItem.dataset.lifespan = file.lifespan; // Store lifespan for reference
+                listItem.dataset.lifespan = file.lifespan;
 
                 fileListElement.appendChild(listItem);
             });
+
+            // Ensure container is visible
+            fileListContainer.style.display = "block";
         });
     }
 
+    // Updated: Handle click on file items with logs
     fileListElement.addEventListener("click", (event) => {
         const listItem = event.target.closest(".file-item");
         if (!listItem) {
             console.log("Click not on a file item.");
             return;
         }
-    
-        console.log("File clicked:", listItem);
-    
+
         const index = parseInt(listItem.dataset.index, 10);
         const currentLifespan = listItem.dataset.lifespan;
-    
-        // Cycle to the next lifespan
+
+        console.log(`File clicked: Index ${index}, Current lifespan: ${currentLifespan}`);
+
+        // Cycle lifespan and update
         const newLifespan = getNextLifespan(currentLifespan);
-        listItem.dataset.lifespan = newLifespan; // Update dataset
-        listItem.querySelector(".lifespan").textContent = `(${newLifespan})`; // Update UI
-    
-        // Update storage
+        listItem.dataset.lifespan = newLifespan;
+        listItem.querySelector(".lifespan").textContent = `(${newLifespan})`;
+
+        // Save updates to storage
         chrome.storage.local.get("files", (data) => {
             const files = data.files || [];
             if (files[index]) {
-                files[index].lifespan = newLifespan; // Update the lifespan
-                chrome.storage.local.set({ files }); // Save updated list
-                console.log(`Lifespan updated to ${newLifespan}`);
+                files[index].lifespan = newLifespan;
+                chrome.storage.local.set({ files });
+                console.log(`Updated lifespan for file ${files[index].fileName} to ${newLifespan}`);
             } else {
-                console.error("File index not found in storage.");
+                console.error("Error: File index not found in storage.");
             }
         });
     });
-    
 
-    // Initial render of the file list
+    // Initial render
     updateFileList();
 
     // Test communication with the native host

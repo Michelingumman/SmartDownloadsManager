@@ -72,17 +72,6 @@ button:hover {
     text-decoration: underline;
 }
 
-.file-list-container {
-    max-height: 150px; /* Limit height for scrollable container */
-    overflow-y: auto; /* Enable vertical scrolling */
-    display: block; /* Initially hidden */
-    background-color: #1f1f1f; /* Dark background for list */
-    padding: 10px;
-    border: 1px solid #333333;
-    border-radius: 8px; /* Rounded corners */
-    margin-top: 10px;
-    line-height: 1.2rem;
-}
 
 #fileListContainer {
     display: block !important; /* Ensure it becomes visible */

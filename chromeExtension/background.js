@@ -17,7 +17,6 @@
 // });
 
 
-
 chrome.downloads.onCreated.addListener((downloadItem) => {
     const downloadTime = new Date().getTime();
     chrome.storage.local.get("files", (data) => {
