@@ -17,3 +17,45 @@ Communication working!
 -------------
 File 'byebye.txt' deleted successfully from Downloads folder.
 -------------
+Error: cannot read more than 33554432 bytes
+-------------
+Error: cannot read more than 33554432 bytes
+-------------
+Error: cannot read more than 33554432 bytes
+-------------
+No message received!
+-------------
+Error: cannot read more than 33554432 bytes
+-------------
+Error: cannot read more than 33554432 bytes
+-------------
+Error: [Errno 32] Broken pipe
+-------------
+-------------
+-------------
+-------------
+-------------
+-------------
+-------------
+-------------
+-------------
+-------------
+----NEW-----
+Error: [Errno 32] Broken pipe
+-------------
+Error: [Errno 32] Broken pipe
+-------------
+Error: [Errno 32] Broken pipe
+-------------
+Communication received at 14:52:36:
+Command: test
+Message: Hello, native host!
+Communication working!
+-------------
+Communication received at 14:53:02:
+Command: delete_file
+Message: lecture2.pdf
+Communication working!
+-------------
+File 'lecture2.pdf' deleted successfully from Downloads folder.
+-------------

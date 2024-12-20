@@ -1,9 +1,9 @@
 {
     "name": "smartdownloadsmanager",
     "description": "Native host for Smart Downloads Manager",
-    "path": "C:\\_Projects\\SmartDownloadsManager\\chromeExtension\\python.py",
+    "path": "C:\\Adam\\_Projects\\SmartDownloadsManager\\chromeExtension\\run.bat",
     "type": "stdio",
     "allowed_origins": [
-        "chrome-extension://dclcmppopiahopgkaddmnalegjpkpafb/"
+        "chrome-extension://fmbojnbeeajdohkjicnbpdfkhpgmggdi/"
     ]
 }

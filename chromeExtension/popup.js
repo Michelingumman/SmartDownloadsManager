@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Test communication with the native host
     testCommunicationButton.addEventListener("click", () => {
         chrome.runtime.sendNativeMessage(
-            "com.smartdownloadsmanager.host",
+            "smartdownloadsmanager",
             { command: "test", message: "Hello, native host!" }, // Send a test message
             (response) => {
                 if (chrome.runtime.lastError) {
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         chrome.runtime.sendNativeMessage(
-            "com.smartdownloadsmanager.host",
+            "smartdownloadsmanager",
             { command: "delete_file", message: filePathInput }, // Send the file path to delete
             (response) => {
                 if (chrome.runtime.lastError) {
