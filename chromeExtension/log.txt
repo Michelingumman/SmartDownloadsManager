@@ -59,3 +59,43 @@ Communication working!
 -------------
 File 'lecture2.pdf' deleted successfully from Downloads folder.
 -------------
+Error while reading message: cannot read more than 33554432 bytes
+-------------
+No message received!
+-------------
+
+
+
+
+
+--------
+
+Communication received at 16:47:14:
+Command: test
+Message: Hello, native host!
+Communication working!
+-------------
+Communication received at 17:07:19:
+Command: test
+Message: Hello, native host!
+Communication working!
+-------------
+Communication received at 17:07:58:
+Command: delete_file
+Message: Analog-Project
+Communication working!
+-------------
+File 'Analog-Project' not found in Downloads folder.
+-------------
+Communication received at 17:08:04:
+Command: delete_file
+Message: Analog-Project.pdf
+Communication working!
+-------------
+File 'Analog-Project.pdf' deleted successfully from Downloads folder.
+-------------
+Communication received at 17:08:23:
+Command: test
+Message: Hello, native host!
+Communication working!
+-------------
