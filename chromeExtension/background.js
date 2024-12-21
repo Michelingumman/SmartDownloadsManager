@@ -116,6 +116,7 @@ function getLifespanInMs(lifespan) {
         case "1d": return 24 * 60 * 60 * 1000;
         case "1w": return 7 * 24 * 60 * 60 * 1000;
         case "1m": return 7 * 24 * 60 * 60 * 4 * 1000;
+        case "1y": return 7 * 24 * 60 * 60 * 4 * 1000;
         default: return Infinity; // "inf"
     }
 }

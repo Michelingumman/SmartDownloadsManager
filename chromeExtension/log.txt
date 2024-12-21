@@ -39,3 +39,13 @@ Command: test
 Message: Hello, native host!
 Communication working!
 -------------
+Communication received at 12:15:00:
+Command: test
+Message: Hello, native host!
+Communication working!
+-------------
+Communication received at 14:25:28:
+Command: test
+Message: Hello, native host!
+Communication working!
+-------------

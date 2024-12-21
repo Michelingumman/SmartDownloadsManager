@@ -13,81 +13,100 @@ document.addEventListener("DOMContentLoaded", () => {
     const testResponse = document.getElementById("testResponse");
     const deletingResponse = document.getElementById("deletingResponse");
 
-    const lifespans = ["1h", "1d", "1w", "1m", "inf"]; // Cycle options
-
-    // Function to cycle lifespan
-    function getNextLifespan(current) {
-        const index = lifespans.indexOf(current);
-        return lifespans[(index + 1) % lifespans.length];
-    }
-
-     // Updated: Ensure visibility and debug logs
-     function updateFileList() {
-        chrome.storage.local.get("files", (data) => {
-            const files = data.files || [];
-            console.log("Fetched files from storage:", files);
-            fileListElement.innerHTML = ""; // Clear existing list
-
-            if (files.length === 0) {
-                const listItem = document.createElement("li");
-                listItem.textContent = "No files stored.";
-                listItem.style.color = "gray";
-                fileListElement.appendChild(listItem);
-                return;
-            }
-
-            // Populate list dynamically
-            files.forEach((file, index) => {
-                const listItem = document.createElement("li");
-                listItem.innerHTML = `
-                    [${index + 1}] - <span class="file-name">${file.fileName}</span>
-                    <span class="lifespan">(${file.lifespan})</span>
-                `;
-                listItem.classList.add("file-item");
-                listItem.dataset.index = index;
-                listItem.dataset.lifespan = file.lifespan;
-
-                fileListElement.appendChild(listItem);
-            });
-
-            // Ensure container is visible
-            fileListContainer.style.display = "block";
-        });
-    }
-
-    // Updated: Handle click on file items with logs
-    fileListElement.addEventListener("click", (event) => {
-        const listItem = event.target.closest(".file-item");
-        if (!listItem) {
-            console.log("Click not on a file item.");
-            return;
-        }
-
-        const index = parseInt(listItem.dataset.index, 10);
-        const currentLifespan = listItem.dataset.lifespan;
-
-        console.log(`File clicked: Index ${index}, Current lifespan: ${currentLifespan}`);
-
-        // Cycle lifespan and update
-        const newLifespan = getNextLifespan(currentLifespan);
-        listItem.dataset.lifespan = newLifespan;
-        listItem.querySelector(".lifespan").textContent = `(${newLifespan})`;
-
-        // Save updates to storage
-        chrome.storage.local.get("files", (data) => {
-            const files = data.files || [];
-            if (files[index]) {
-                files[index].lifespan = newLifespan;
-                chrome.storage.local.set({ files });
-                console.log(`Updated lifespan for file ${files[index].fileName} to ${newLifespan}`);
+    
+    const lifespans = ["1w", "1m", "1y", "inf"]; // Cycle options
+    
+        // Function to toggle the visibility of the file list
+        viewFilesToggle.addEventListener("click", () => {
+            if (fileListContainer.style.display === "none") {
+                fileListContainer.style.display = "block";
+                viewFilesToggle.textContent = "Hide files <";
             } else {
-                console.error("Error: File index not found in storage.");
+                fileListContainer.style.display = "none";
+                viewFilesToggle.textContent = "View files >";
             }
         });
-    });
+    
+        // Function to get the next lifespan in the cycle
+        function getNextLifespan(current) {
+            const index = lifespans.indexOf(current);
+            return lifespans[(index + 1) % lifespans.length];
+        }
+    
+        function updateFileList() {
+            chrome.storage.local.get("files", (data) => {
+                const files = data.files || [];
+                fileListElement.innerHTML = ""; // Clear existing list
+        
+                // Filter out empty or invalid file entries
+                const validFiles = files.filter(file => file && file.fileName && file.lifespan);
+        
+                if (validFiles.length === 0) {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = "No files stored.";
+                    listItem.style.color = "gray";
+                    fileListElement.appendChild(listItem);
+                    return;
+                }
+        
+                // Populate the list with valid files
+                validFiles.forEach((file, index) => {
+                    const listItem = document.createElement("li");
+                    listItem.innerHTML = `
+                        [${index + 1}] - <span class="file-name">${file.fileName}</span>
+                        <span class="lifespan">(${file.lifespan})</span>
+                    `;
+                    listItem.classList.add("file-item");
+                    listItem.dataset.index = index;
+                    listItem.dataset.lifespan = file.lifespan;
+        
+                    // Add click listener to toggle lifespan
+                    listItem.addEventListener("click", () => {
+                        const currentLifespan = listItem.dataset.lifespan;
+                        const newLifespan = lifespans[(lifespans.indexOf(currentLifespan) + 1) % lifespans.length];
+                        listItem.dataset.lifespan = newLifespan;
+                        listItem.querySelector(".lifespan").textContent = `(${newLifespan})`;
+        
+                        // Update storage
+                        chrome.storage.local.get("files", (data) => {
+                            const files = data.files || [];
+                            if (files[index]) {
+                                files[index].lifespan = newLifespan;
+                                chrome.storage.local.set({ files });
+                            }
+                        });
+                    });
+        
+                    fileListElement.appendChild(listItem);
+                });
+            });
+        }
+        
+        // Initial render of the file list
+        updateFileList();
 
-    // Initial render
-    updateFileList();
+
+
+        // Set lifespan for the latest file
+        setLifespanButton.addEventListener("click", () => {
+            const selectedLifespan = lifespanSelector.value;
+    
+            chrome.storage.local.get("files", (data) => {
+                const files = data.files || [];
+                if (files.length > 0) {
+                    files[0].lifespan = selectedLifespan; // Set lifespan for the latest file
+                    chrome.storage.local.set({ files }, () => {
+                        alert("Lifespan updated!");
+                        updateFileList(); // Refresh UI
+                    });
+                } else {
+                    alert("No files to update.");
+                }
+            });
+        });
+
+    
+
 
     // Test communication with the native host
     testCommunicationButton.addEventListener("click", () => {
@@ -177,32 +196,4 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Toggle the view files section
-    viewFilesToggle.addEventListener("click", () => {
-        if (fileListContainer.style.display === "none") {
-            chrome.storage.local.get("files", (data) => {
-                const files = data.files || [];
-                fileListElement.innerHTML = ""; // Clear previous list
-
-                if (files.length === 0) {
-                    const listItem = document.createElement("li");
-                    listItem.textContent = "No files stored.";
-                    fileListElement.appendChild(listItem);
-                } else {
-                    files.reverse().forEach((file, index) => {
-                        const listItem = document.createElement("li");
-                        listItem.innerHTML = ` [${index + 1}] - <span>${file.fileName}  </span> <span class="lifespan">( ${file.lifespan} )</span>`;
-                        fileListElement.appendChild(listItem);
-                    });
-                }
-
-                fileListContainer.style.display = "block"; // Show the list
-                viewFilesToggle.textContent = "Hide files <";
-            });
-        } else {
-            fileListContainer.style.display = "none"; // Hide the list
-            viewFilesToggle.textContent = "View files >";
-        }
-    });
 });
-

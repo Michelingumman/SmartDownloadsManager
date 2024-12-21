@@ -73,28 +73,39 @@ button:hover {
 }
 
 
-#fileListContainer {
-    display: block !important; /* Ensure it becomes visible */
-    max-height: 150px;
-    overflow-y: auto;
-    background-color: #1f1f1f;
-    padding: 10px;
-    border: 1px solid #333333;
-    border-radius: 8px;
-    margin-top: 10px;
-    line-height: 1.2rem;
+#viewFilesToggle {
+    text-align: center;
+    text-decoration: underline;
+    color: #e0e0e0;
+    cursor: pointer;
+    margin: 10px 0;
 }
 
+/* File List Container */
+#fileListContainer {
+    display: none; /* Hidden by default */
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #444444; /* Darker border for dark mode */
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #292929; /* Dark mode background for the list */
+    border-radius: 8px;
+}
+
+/* File Items */
 .file-item {
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    margin-bottom: 5px;
+    color: #ffffff; /* White text for dark mode */
+    line-height: 1.1rem;
 }
 
 .file-item:hover {
-    background-color: #333333; /* Darker background on hover */
+    color: #93c6fcc8; /* Subtle blue on hover */
 }
 
-
+/* General List Styling */
 ul {
     list-style: none;
     padding: 0;
@@ -103,34 +114,40 @@ ul {
 
 li {
     margin: 5px 0;
-    color: #dad9d9;
+    color: #dad9d9; /* Light gray for text */
 }
 
+/* Lifespan Styling */
 span.lifespan {
     color: #70b4fd; /* Subtle blue for lifespan */
     font-style: italic;
 }
 
+/* Advanced Mode Container */
+.advanced-mode-container {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #292929; /* Dark mode background */
+    border-radius: 8px;
+    display: none; /* Hidden by default */
+}
 
-
+/* Advanced Mode Button */
 .advanced-mode-button {
-    margin-top: 0px;
-    padding: 4px;
-    width: auto;
+    margin-top: 10px;
+    padding: 6px;
     background-color: transparent;
-    color: #6d6d6d;
+    color: #6d6d6d; /* Subtle gray */
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .advanced-mode-button:hover {
-    background-color: #333;
+    background-color: #444444; /* Slightly darker on hover */
 }
+
 
 .advanced-mode-container {
     margin-top: 0px;
