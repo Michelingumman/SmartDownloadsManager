@@ -11,6 +11,26 @@ Smart Downloads Manager is a Chrome extension that allows users to manage their 
 - Cross-platform support for Windows and macOS.
 - Easy setup with an installer for both platforms.
 
+<br>
+<br>
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <p>Popup Look</p>
+        <img src="https://github.com/user-attachments/assets/43da7df7-40a9-44c9-9f2b-671d7d0cba7e" alt="Popup" width="350px">
+      </td>
+      <td align="center">
+        <p>Advanced Mode Tab</p>
+        <img src="https://github.com/user-attachments/assets/832c4479-02c7-43a7-b2a8-a04004bf234f" alt="Advanced Mode" width="350px">
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+
 ---
 
 ## Installation
@@ -115,7 +135,7 @@ Smart Downloads Manager is a Chrome extension that allows users to manage their 
      - macOS: `~/Library/Application Support/Google/Chrome/NativeMessagingHosts/smartdownloadsmanager.json`
 
 2. **Python Script Not Running**
-   - Ensure that Python 3 is installed and added to the PATH.
+   - Ensure that Python is installed and added to the PATH.
    - Check the paths in `run.bat` (Windows) or `run.sh` (macOS).
 
 3. **Logs**
