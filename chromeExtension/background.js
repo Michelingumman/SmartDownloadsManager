@@ -41,8 +41,8 @@ function getLifespanInMs(lifespan) {
         // case "1d":
         //     return 24 * 60 * 60 * 1000; // 1 Day
         case "1w":
-            return 20000; // test with 20 seconds
-            // return 7 * 24 * 60 * 60 * 1000; // 1 Week
+            // return 20000; // test with 20 seconds
+            return 7 * 24 * 60 * 60 * 1000; // 1 Week
         case "1m":
             return 30 * 24 * 60 * 60 * 1000; // 1 Month (approx.)
         case "1y":
@@ -131,5 +131,5 @@ setInterval(() => {
             console.log("Updated file list after expiration check.");
         });
     });
-// }, 24 * 60 * 60 * 1000); // Check every 24 hours
-}, 10000); // Check every 10 seconds
+}, 24 * 60 * 60 * 1000); // Check every 24 hours
+// }, 10000); // Check every 10 seconds
