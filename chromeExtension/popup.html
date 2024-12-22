@@ -11,15 +11,15 @@
 
     <!-- File Lifespan Section -->
 
-    <p>Last downloaded file: </p>
+    <p>Last downloaded file:</p>
     <div id="fileName" style="text-align: center; color:rgb(91, 188, 248)">Loading...</div>
 
     <div class="lifespan-container">
         <label for="expiry">Its lifespan:</label>
         <div class="dropdown-set">
             <select id="expiry">
-                <option value="1h">1 Hour</option>
-                <option value="1d">1 Day</option>
+                <!-- <option value="1h">1 Hour</option> -->
+                <!-- <option value="1d">1 Day</option> -->
                 <option value="1w">1 Week</option>
                 <option value="1m">1 Month</option>
                 <option value="inf">Forever</option>
@@ -27,7 +27,15 @@
             <button id="setLifespan">Set</button>
         </div>
     </div>
+    
 
+    
+    <!-- Last Deleted File Section -->
+    <!-- <p>Last deleted file:</p>
+    <div id="lastDeletedFile" style="text-align: center; color: rgb(224, 103, 103); font-size: 11px;">
+        No files have been deleted yet.
+    </div>
+     -->
 
     <!-- View Files Section -->
     <hr>
@@ -39,13 +47,13 @@
         </p>
     </div>
     
-
-    <br>
     
     
     <button id="advancedModeToggle" class="advanced-mode-button">Advanced Mode</button>
     <br>
     
+
+
     <div id="advancedModeContainer" class="advanced-mode-container" style="display: none;">
         <h3 style="text-decoration: underline;">Advanced Mode</h3>
         <h4>Test Communication to Local Script</h4>

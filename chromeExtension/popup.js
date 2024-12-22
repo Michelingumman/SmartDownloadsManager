@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const testResponse = document.getElementById("testResponse");
     const deletingResponse = document.getElementById("deletingResponse");
 
+    const lastDeletedFileElement = document.getElementById("lastDeletedFile");
+
     
     const lifespans = ["1w", "1m", "1y", "inf"]; // Cycle options
     
@@ -33,6 +35,34 @@ document.addEventListener("DOMContentLoaded", () => {
             return lifespans[(index + 1) % lifespans.length];
         }
     
+
+            // Update the last downloaded file
+    function updateLastDownloadedFile() {
+        chrome.storage.local.get("files", (data) => {
+            const files = data.files || [];
+            if (files.length > 0) {
+                const lastFile = files[files.length - 1];
+                fileNameElement.textContent = lastFile.fileName;
+            } else {
+                fileNameElement.textContent = "No recent downloads.";
+            }
+        });
+    }
+
+    // Update the last deleted file
+    function updateLastDeletedFile() {
+        chrome.storage.local.get("lastDeletedFile", (data) => {
+            const lastDeleted = data.lastDeletedFile;
+            if (lastDeleted) {
+                lastDeletedFileElement.textContent = lastDeleted;
+                lastDeletedFileElement.style.color = "rgb(91, 188, 248)";
+            } else {
+                lastDeletedFileElement.textContent = "No files have been deleted yet.";
+                lastDeletedFileElement.style.color = "rgb(224, 103, 103)";
+            }
+        });
+    }
+
         function updateFileList() {
             chrome.storage.local.get("files", (data) => {
                 const files = data.files || [];
@@ -82,10 +112,23 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
         
-        // Initial render of the file list
-        updateFileList();
 
 
+            // Initial updates
+    updateLastDownloadedFile();
+    updateLastDeletedFile();
+    updateFileList();
+
+
+        // Listen for updates from background.js
+        chrome.runtime.onMessage.addListener((message) => {
+            if (message.type === "updateFiles") {
+                updateLastDownloadedFile();
+                updateLastDeletedFile();
+                updateFileList();
+            }
+        });
+        
 
         // Set lifespan for the latest file
         setLifespanButton.addEventListener("click", () => {
@@ -98,6 +141,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     chrome.storage.local.set({ files }, () => {
                         alert("Lifespan updated!");
                         updateFileList(); // Refresh UI
+                        console.log("files in storage: ");
+                        chrome.storage.local.get("files", (data) => console.log(data))
+
                     });
                 } else {
                     alert("No files to update.");
@@ -127,32 +173,50 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     });
 
+
+    
      // Test deleting a file
     testDeleteFileButton.addEventListener("click", () => {
         const filePathInput = document.getElementById("testFilePath").value.trim();
-
+    
         if (!filePathInput) {
             deletingResponse.textContent = "Error: Please enter a valid file path.";
             deletingResponse.style.color = "red";
             return;
         }
-
+    
         chrome.runtime.sendNativeMessage(
             "smartdownloadsmanager",
-            { command: "delete_file", message: filePathInput }, // Send the file path to delete
+            { command: "delete_file", message: filePathInput },
             (response) => {
                 if (chrome.runtime.lastError) {
                     console.error("Error:", chrome.runtime.lastError.message);
                     deletingResponse.textContent = `Error: ${chrome.runtime.lastError.message}`;
-                    deletingResponse.style.color = "red"; // Set response color to red for errors
+                    deletingResponse.style.color = "red";
                 } else {
                     console.log("Response from native host:", response);
-                    deletingResponse.textContent = `Response: ${response.message}`;
-                    deletingResponse.style.color = response.status === "success" ? "green" : "red";
+                    if (response.status === "success") {
+                        deletingResponse.textContent = `File deleted: ${filePathInput}`;
+                        deletingResponse.style.color = "green";
+    
+                        // Update UI and storage
+                        chrome.storage.local.get("files", (data) => {
+                            const files = data.files || [];
+                            const updatedFiles = files.filter((file) => file.fileName !== filePathInput);
+                            chrome.storage.local.set({ files: updatedFiles }, () => {
+                                console.log(`Removed ${filePathInput} from storage.`);
+                                updateFileList(); // Refresh UI
+                            });
+                        });
+                    } else {
+                        deletingResponse.textContent = `Failed to delete: ${response.message}`;
+                        deletingResponse.style.color = "red";
+                    }
                 }
             }
         );
     });
+    
 
 
     // Toggle Advanced Mode
@@ -184,10 +248,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (fileIndex !== -1) {
                         files[fileIndex].lifespan = selectedLifespan;
                         chrome.storage.local.set({ files: files }, () => {
-                            alert("Lifespan updated!");
+                            // alert("Lifespan updated!");
                         });
                     } else {
-                        alert("File not found in storage.");
+                        // alert("File not found in storage.");
                     }
                 });
             });

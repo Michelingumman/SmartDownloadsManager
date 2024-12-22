@@ -81,7 +81,7 @@ try:
             else:
                 response = {
                     "status": "error",
-                    "message": f"File '{filename}' not found in Downloads folder."
+                    "message": "file not found"
                 }
                 log_message(f"File '{filename}' not found in Downloads folder.")
         else:

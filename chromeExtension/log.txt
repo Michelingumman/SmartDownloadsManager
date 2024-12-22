@@ -49,3 +49,181 @@ Command: test
 Message: Hello, native host!
 Communication working!
 -------------
+Communication received at 15:12:14:
+Command: delete_file
+Message: SSY251 Course PM_Slides (9).pdf
+Communication working!
+-------------
+File 'SSY251 Course PM_Slides (9).pdf' deleted successfully from Downloads folder.
+-------------
+Communication received at 15:13:07:
+Command: test
+Message: Hello, native host!
+Communication working!
+-------------
+Communication received at 15:15:31:
+Command: delete_file
+Message: SSY251 Course PM_Slides (11).pdf
+Communication working!
+-------------
+File 'SSY251 Course PM_Slides (11).pdf' deleted successfully from Downloads folder.
+-------------
+Communication received at 15:27:36:
+Command: delete_file
+Message: SSY251 Course PM_Slides (10).pdf
+Communication working!
+-------------
+File 'SSY251 Course PM_Slides (10).pdf' deleted successfully from Downloads folder.
+-------------
+Communication received at 15:27:44:
+Command: delete_file
+Message: SSY251 Course PM_Slides (11).pdf
+Communication working!
+-------------
+File 'SSY251 Course PM_Slides (11).pdf' not found in Downloads folder.
+-------------
+Communication received at 15:34:46:
+Command: test
+Message: Hello, native host!
+Communication working!
+-------------
+Communication received at 15:36:21:
+Command: delete_file
+Message: Lecture 1_Slides (17).pdf
+Communication working!
+-------------
+File 'Lecture 1_Slides (17).pdf' deleted successfully from Downloads folder.
+-------------
+Communication received at 15:38:58:
+Command: delete_file
+Message: Lecture 1_Slides (16).pdf
+Communication working!
+-------------
+File 'Lecture 1_Slides (16).pdf' deleted successfully from Downloads folder.
+-------------
+Communication received at 15:49:26:
+Command: delete_file
+Message: SmartDownloadsManager-main.zip
+Communication working!
+-------------
+File 'SmartDownloadsManager-main.zip' deleted successfully from Downloads folder.
+-------------
+Communication received at 15:50:46:
+Command: delete_file
+Message: SmartDownloadsManager-main.zip
+Communication working!
+-------------
+File 'SmartDownloadsManager-main.zip' deleted successfully from Downloads folder.
+-------------
+Communication received at 15:54:31:
+Command: delete_file
+Message: 
+Communication working!
+-------------
+Failed to delete file '': [WinError 5] Access is denied: 'C:\\Users\\adamm/Downloads\\'
+-------------
+Communication received at 00:23:06:
+Command: delete_file
+Message: flows.json
+Communication working!
+-------------
+File 'flows.json' deleted successfully from Downloads folder.
+-------------
+Communication received at 00:23:21:
+Command: test
+Message: Hello, native host!
+Communication working!
+-------------
+Communication received at 00:23:31:
+Command: delete_file
+Message: SmartDownloadsManager-main (1).zip
+Communication working!
+-------------
+File 'SmartDownloadsManager-main (1).zip' deleted successfully from Downloads folder.
+-------------
+Communication received at 00:23:43:
+Command: delete_file
+Message: flows.json
+Communication working!
+-------------
+File 'flows.json' not found in Downloads folder.
+-------------
+Communication received at 00:23:43:
+Command: delete_file
+Message: flows.json
+Communication working!
+-------------
+File 'flows.json' not found in Downloads folder.
+-------------
+Communication received at 13:10:20:
+Command: delete_file
+Message: Lecture 1_Slides (16).pdf
+Communication working!
+-------------
+File 'Lecture 1_Slides (16).pdf' deleted successfully from Downloads folder.
+-------------
+Communication received at 13:10:50:
+Command: delete_file
+Message: Lecture 1_Slides (19).pdf
+Communication working!
+-------------
+File 'Lecture 1_Slides (19).pdf' deleted successfully from Downloads folder.
+-------------
+Communication received at 13:30:11:
+Command: delete_file
+Message: Lecture 1_Slides (17).pdf
+Communication working!
+-------------
+File 'Lecture 1_Slides (17).pdf' deleted successfully from Downloads folder.
+-------------
+Communication received at 13:30:30:
+Command: delete_file
+Message: Lecture 1_Slides (18).pdf
+Communication working!
+-------------
+File 'Lecture 1_Slides (18).pdf' deleted successfully from Downloads folder.
+-------------
+Communication received at 13:56:05:
+Command: delete_file
+Message: Lecture 1_Slides (16).pdf
+Communication working!
+-------------
+File 'Lecture 1_Slides (16).pdf' deleted successfully from Downloads folder.
+-------------
+Communication received at 13:57:00:
+Command: delete_file
+Message: Lecture 1_Slides (18).pdf
+Communication working!
+-------------
+File 'Lecture 1_Slides (17).pdf' deleted successfully from Downloads folder.
+-------------
+File 'Lecture 1_Slides (18).pdf' deleted successfully from Downloads folder.
+-------------
+Communication received at 14:08:35:
+Command: delete_file
+Message: Lecture 1_Slides (16).pdf
+Communication working!
+-------------
+File 'Lecture 1_Slides (16).pdf' deleted successfully from Downloads folder.
+-------------
+Communication received at 14:08:45:
+Command: delete_file
+Message: Lecture 1_Slides (18).pdf
+Communication working!
+-------------
+File 'Lecture 1_Slides (18).pdf' deleted successfully from Downloads folder.
+-------------
+Communication received at 14:09:30:
+Command: delete_file
+Message: Lecture 1_Slides (17).pdf
+Communication working!
+-------------
+File 'Lecture 1_Slides (17).pdf' deleted successfully from Downloads folder.
+-------------
+Communication received at 14:25:10:
+Command: delete_file
+Message: Lecture 1_Slides (16).pdf
+Communication working!
+-------------
+File 'Lecture 1_Slides (16).pdf' deleted successfully from Downloads folder.
+-------------
