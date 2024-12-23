@@ -54,7 +54,7 @@ try:
     message = read_message()
     if message:
         # Log the received message
-        timestamp = time.strftime("%H:%M:%S")
+        timestamp = time.strftime("%D --> %H:%M:%S")
         log_message(f"Communication received at {timestamp}:\nCommand: {message['command']}\nMessage: {message['message']}\nCommunication working!")
 
         # Process the message
