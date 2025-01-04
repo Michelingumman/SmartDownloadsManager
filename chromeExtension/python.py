@@ -6,7 +6,7 @@ import time
 
 # Define the allowed directory (Downloads folder)
 ALLOWED_DIRECTORY = os.path.expanduser("~/Downloads")
-LOG_FILE_PATH = "C:/Adam/_Projects/SmartDownloadsManager/chromeExtension/log.txt"
+LOG_FILE_PATH = "chromeExtension/log.txt"
 
 def log_message(message):
     """Helper function to log messages to a file."""
